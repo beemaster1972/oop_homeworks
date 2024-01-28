@@ -1,5 +1,9 @@
 package gb.oop;
 
+/**
+ * Класс описывающий магазин
+ *
+ */
 public class Store {
     private String name;
     private Basket store;
@@ -37,6 +41,13 @@ public class Store {
                 quantity,user.getName());
     }
 
+    /**
+     * Метод добавления на склад магазина товаров
+     * @param product Товар или Категория товаров
+     * @param quantity Количество
+     * Если параметр product передается Категория товаров, то в цикле
+     * все товары из категории добавляются на склад в количестве quantity
+     */
     public void addProductToStore(Product product, int quantity){
         if (product instanceof ProductCategory){
             for (Product newProduct: ((ProductCategory) product).getProducts()){

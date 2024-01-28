@@ -6,6 +6,13 @@ package gb.oop;
 import java.util.Objects;
 import java.util.Random;
 
+/**
+ * Родительский класс для товаров
+ *
+ */
+
+//TODO реализовать класс Product как абстрактный
+
 public class Product {
     protected String name;
     protected int price;
