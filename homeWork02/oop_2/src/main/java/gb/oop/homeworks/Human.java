@@ -2,35 +2,33 @@ package gb.oop.homeworks;
 
 import java.util.Random;
 
-public class Human extends Creatures {
-    private int maxRunDistance;
-    private int maxJumpHeight;
+/**
+ * Класс Человек, наследуется от базового класса тварей
+ */
+public class Human extends Creature {
 
-    public Human(String name) {
-        super(name);
-        this.rand = new Random();
-        this.maxRunDistance = setMaxValue(1000,100);
-        this.maxJumpHeight = setMaxValue(200,50);
-
+    // Константы для определения случайных величин
+    final private static int MAX_SPEED = 5;
+    final private static int MIN_SPEED = 1;
+    final private static int MAX_DISTANCE = 1_000;
+    final private static int MIN_DISTANCE = 100;
+    final private static int MAX_HEIGHT = 200;
+    final private static int MIN_HEIGHT = 100;
+    private static int humanCount;
+    static {
+        humanCount = 0;
     }
 
-    @Override
-    public void overcoming(Obstacles obstacle) {
-        int maxDimension = switch (obstacle.getDirection()) {
-            case horizontal -> maxRunDistance;
-            case vertical -> maxJumpHeight;
-        };
-        String action = switch (obstacle.getDirection()){
-            case horizontal -> "пробежал дистанцию";
-            case vertical -> "перепрыгул препятствие высотой";
-        };
-        if (obstacle.getDimension()>maxDimension) canContinue = false;
-        if(!canContinue){
-            System.out.printf("Человек %s не может продолжать гонку%n", getName());
-            return;
-        }
-        System.out.printf("Человек %s %s %d %s",getName(),action,obstacle.getDimension(),obstacle.getUnit());
+    public Human(String name, int speed) {
+        super(name, speed);
+        Human.rand = new Random();
+        this.maxRunDistance = setMaxValue(MAX_DISTANCE,MIN_DISTANCE);
+        this.maxJumpHeight = setMaxValue(MAX_HEIGHT,MIN_HEIGHT);
 
     }
+    public Human(){
+        this(setDefaultName("Человек", ++humanCount), setMaxValue(MAX_SPEED,MIN_SPEED));
+    }
+
 
 }

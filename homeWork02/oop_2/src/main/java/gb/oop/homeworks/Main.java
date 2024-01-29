@@ -14,10 +14,111 @@
  */
 package gb.oop.homeworks;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.List;
+import java.util.Random;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Comparator;
+
 public class Main {
     public static void main(String[] args) {
+        // Размер команды для гонки
+        int teamSize = 10;
+        // Общее количество препятствий
+        int obstaclesMaxCount = 5;
+        Random rand = new Random();
+        int invariant;
+        List<Obstacles> obstacles = new ArrayList<>(obstaclesMaxCount);
+        for (int i = 0; i < obstaclesMaxCount; i++) {
+            // Здесь указывается количество видов препятствий
+            //                         ||
+            //                         \/
+            invariant = rand.nextInt(2);
+            switch (invariant) {
+                case 0:
+                    obstacles.add(new Treadmill());
+                    break;
+                case 1:
+                    obstacles.add(new Barrier());
+                    break;
+            }
 
+        }
+        // Общий список персонажей участвующих в гонке
+        List<Creature> athleticsTeam = new ArrayList<>(teamSize);
+        for (int i = 0; i < teamSize; i++) {
+            // Здест указывается количество видов персонажей
+            //                          ||
+            //                          \/
+            invariant = rand.nextInt(3);
+            switch (invariant) {
+                case 0:
+                    athleticsTeam.add(new Human());
+                    break;
+                case 1:
+                    athleticsTeam.add(new Cat());
+                    break;
+                case 2:
+                    athleticsTeam.add(new Robot());
+                    break;
+            }
+        }
+        for (Creature athlete : athleticsTeam) athlete.start();
+        // Список race будет уменьшаться по мере выбытия персонажей из гонки
+        List<Creature> race = new LinkedList<>(athleticsTeam);
+        int count = 1;
+        String name;
+        String separator = "=========================================================================";
+        for (Obstacles obstacle : obstacles) {
+            name = switch (obstacle.getDirection()) {
+                case horizontal -> "Дорожка длиной";
+                case vertical -> "Барьер высотой";
+            };
+            System.out.println(separator);
+            System.out.printf("Этап № %d. %s %d %s%n", count, name, obstacle.getDimension(), obstacle.getUnit());
+            if (!race.isEmpty()) {
+                int i = 0;
+                while (i < race.size()) {
+                    Creature athlete = race.get(i);
+                    athlete.overcoming(obstacle);
+                    if (!athlete.isContinue()) {
+                        race.remove(athlete);
+                    } else i++;
+                }
+            } else {
+                break;
+            }
+            count++;
+
+        }
+        athleticsTeam.sort(new AthleteComparator());
+        int place = 1;
+        System.out.println(separator);
+        System.out.println("ИТОГОВАЯ ТАБЛИЦА:");
+        for (Creature athlete : athleticsTeam) {
+            if (athlete.isContinue()) {
+                System.out.printf("%s по имени %s занял %d место, пройдя дистанцию за %d сек.%n",
+                        athlete.getClass().getTypeName(),
+                        athlete.getName(),
+                        place++,
+                        athlete.finish());
+                System.out.println(athlete.getInfo());
+            } else System.out.printf("%s по имени %s сошел с дистанции%n",
+                    athlete.getClass().getTypeName(),
+                    athlete.getName());
+
+        }
+        System.out.println(separator);
+
+    }
+}
+
+/**
+ * Класс-компаратор для сортировки списка персонажей по времени затраченному на прохождение всей гонки
+ */
+class AthleteComparator implements Comparator<Creature> {
+    @Override
+    public int compare(Creature a, Creature b) {
+        return a.time < b.time ? -1 : a.time == b.time ? 0 : 1;
     }
 }
