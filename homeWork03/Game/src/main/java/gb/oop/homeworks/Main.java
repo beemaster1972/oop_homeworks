@@ -27,6 +27,11 @@ public class Main {
             "Введите ваш ответ: ");
     public static String promptValue = "Введите %s";
 
+    /**
+     * Метод возвращающий класс игры в зависимости от выбранного варианта
+     * @param typeGame Целое число
+     * @return Класс реализующий конкретный тип игры
+     */
     public static AbstractGame getTypeGame(int typeGame) {
         AbstractGame result;
         result = switch (typeGame) {
@@ -38,6 +43,12 @@ public class Main {
         return result;
     }
 
+    /**
+     * Метод запроса целочисленных данных у игрока
+     * @param prompt Текстовое приглашения
+     * @param scanner экземпляр сканера для считывания данных
+     * @return целое число введеное игроком или -999 в случае ошибки.
+     */
     public static int getAnswer(String prompt, Scanner scanner) {
         System.out.printf(prompt);
         int result = -999;
@@ -54,6 +65,12 @@ public class Main {
 
     }
 
+    /**
+     * Метод запрашивающий у игрока строковые данные
+     * @param prompt текствое приглашение
+     * @param scanner экземпляр сканера для ввода данных
+     * @return Строку введеную пользователем
+     */
     public static String getString(String prompt, Scanner scanner) {
         System.out.printf(prompt);
         String result = scanner.nextLine();
@@ -115,6 +132,14 @@ public class Main {
         scanner.close();
     }
 
+    /**
+     * Метод проверки введенных игроком параметров игры
+     * @param game экземпляр текущей игры
+     * @param wordSize размер загаданного слова
+     * @param maxAttempts  количество попыток
+     * @param conditions условия генерации слова
+     * @return true если введенные параметры корректны, иначе false
+     */
     private static boolean checkParameters(AbstractGame game, Integer wordSize, Integer maxAttempts, Conditions conditions) {
         if (Objects.isNull(conditions)) return false;
         if (wordSize <= 0 || wordSize > maxWordSize) {

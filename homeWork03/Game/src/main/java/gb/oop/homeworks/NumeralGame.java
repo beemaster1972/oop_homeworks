@@ -4,6 +4,9 @@ package gb.oop.homeworks;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс реализующий игру с цифрами [0;9]
+ */
 public class NumeralGame extends AbstractGame{
     @Override
     public List<String> generateCharList() {

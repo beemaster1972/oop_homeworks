@@ -1,5 +1,9 @@
 package gb.oop.homeworks;
 
+/**
+ * Класс ответа после проверки варианта игрока с загаданным словом
+ * Хранит оставшееся количество поыток, кол-во "коров", кол-во "быков".
+ */
 public class Answer {
     private Integer attemptCounter;
     private Integer cowCounter;
@@ -23,6 +27,6 @@ public class Answer {
 
     @Override
     public String toString() {
-        return String.format("На %d попытке вы угадали %d символа. Точных совпадений %d",attemptCounter, cowCounter, bullCounter);
+        return String.format("На %d попытке вы угадали %d символа. Точных совпадений %d",attemptCounter+1, cowCounter, bullCounter);
     }
 }

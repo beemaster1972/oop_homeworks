@@ -3,6 +3,9 @@ package gb.oop.homeworks;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс реализующий игру с кирилицей
+ */
 public class RuGame extends AbstractGame{
     @Override
     public List<String> generateCharList() {

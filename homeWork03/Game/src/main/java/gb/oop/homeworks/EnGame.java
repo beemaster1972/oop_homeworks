@@ -3,6 +3,9 @@ package gb.oop.homeworks;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс реализующий тип игры с латинским алфавитом
+ */
 public class EnGame extends AbstractGame{
     @Override
     public List<String> generateCharList() {

@@ -3,6 +3,7 @@ package gb.oop.homeworks;
 import java.util.List;
 import java.util.Random;
 
+/** Класс прародитель всех игр типа Быки и коровы */
 public abstract class AbstractGame implements Game {
     private String word;
     private Integer attemptCounter;
@@ -13,6 +14,12 @@ public abstract class AbstractGame implements Game {
     private HistoryGame historyGame;
     private Integer charListSize;
 
+    /**
+     * Метод генерации загаданного слова
+      * @param sizeWord Целое число, длина загаданного слова
+     * @param conditions Условия генерации (только уникальные символы или повторяющиеся)
+     * @return Строку - загаданное слово
+     */
     public String generateWord(Integer sizeWord, Conditions conditions) {
         StringBuilder result = new StringBuilder();
         List<String> charList = generateCharList();
@@ -22,7 +29,7 @@ public abstract class AbstractGame implements Game {
         for (int i = 0; i < sizeWord; i++) {
             switch (conditions) {
                 case UNIQUE_SYMBOLS:
-                    while (result.lastIndexOf(randomSymbol)>-1) {
+                    while (result.lastIndexOf(randomSymbol) > -1) {
                         randomSymbol = charList.get(rand.nextInt(charList.size()));
                     }
                     break;
@@ -36,8 +43,21 @@ public abstract class AbstractGame implements Game {
         return historyGame;
     }
 
+    /**
+     * Метод генерации "алфавита"
+     * Метод имплементируется в классах реализующих конкретный тип игры
+     * @return Список символов
+     */
     public abstract List<String> generateCharList();
 
+    /**
+     * Метод начала игры
+     * @param sizeWord размер загаданного слова
+     * @param attemptCounter количество попыток
+     * @param conditions условия генерации загаданного слова
+     * Если текущий статус RESTART то будет использовано текущее слово,
+     * переинициализируются количество попыток и история игры
+     */
     @Override
     public void start(Integer sizeWord, Integer attemptCounter, Conditions conditions) {
         if (!status.equals(GameStatus.RESTART)) {
@@ -51,22 +71,26 @@ public abstract class AbstractGame implements Game {
         historyGame = new HistoryGame();
     }
 
-
     @Override
     public void stop() {
-       status = GameStatus.LOSE;
+        status = GameStatus.LOSE;
     }
 
     @Override
     public void restart() {
         status = GameStatus.RESTART;
-        start(wordSize,maxAttempts,currentCondition);
-
+        start(wordSize, maxAttempts, currentCondition);
     }
 
+    /**
+     * Метод проверки введенного ответа игрока
+     * @param value ответ игрока
+     * @return класс Answer
+     */
     @Override
     public Answer inputValue(String value) {
-        if (!getGameStatus().equals(GameStatus.START)) throw new RuntimeException("Игра не в активном состоянии");
+        if (!getGameStatus().equals(GameStatus.START))
+            throw new RuntimeException("Игра не в активном состоянии");
         int cowCount = 0;
         int bullCount = 0;
         if (!value.isEmpty()) {
@@ -74,7 +98,8 @@ public abstract class AbstractGame implements Game {
                 if (word.charAt(i) == value.charAt(i)) {
                     bullCount++;
                     cowCount++;
-                } else if (word.contains(String.valueOf(value.charAt(i)))) cowCount++;
+                } else if (word.contains(String.valueOf(value.charAt(i))))
+                    cowCount++;
             }
         }
         --attemptCounter;
