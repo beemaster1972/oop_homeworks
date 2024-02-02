@@ -21,4 +21,9 @@ public class NumeralGame extends AbstractGame{
     public Integer getCharListSize() {
         return 10;
     }
+
+    @Override
+    public String getTypeGame() {
+        return "'Игра с цифрами [0;9]'";
+    }
 }

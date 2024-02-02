@@ -1,7 +1,7 @@
 package gb.oop.homeworks;
 
 public enum GameStatus {
-    INIT, START, RESTART, LOSE("Вы проиграли"), WIN("Вы выиграли");
+    INIT, START, RESTART, EXIT, LOSE("Вы проиграли"), WIN("Вы выиграли");
     private String description;
 
     GameStatus(String description) {

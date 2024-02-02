@@ -22,4 +22,9 @@ public class RuGame extends AbstractGame{
     public Integer getCharListSize() {
         return 33;
     }
+
+    @Override
+    public String getTypeGame() {
+        return "'Игра с кирилицей'";
+    }
 }

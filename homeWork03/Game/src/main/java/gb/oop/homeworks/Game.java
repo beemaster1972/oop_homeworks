@@ -10,9 +10,14 @@ public interface Game {
     void start(Integer sizeWord, Integer maxTry, Conditions conditions);
 
     /**
-     * Метод заканчивающий игру с результатом ПРОИГРЫШ
+     * Метод останавливающий игру с статусом INIT
      */
     void stop();
+
+    /**
+     * Метод завершающий игру
+     */
+    void exit();
 
     /**
      * Метод перезапускающий текущую игру

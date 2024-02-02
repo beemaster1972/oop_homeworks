@@ -21,4 +21,9 @@ public class EnGame extends AbstractGame{
     public Integer getCharListSize() {
         return 26;
     }
+
+    @Override
+    public String getTypeGame() {
+        return "'Игра с латинским алфавитом'";
+    }
 }

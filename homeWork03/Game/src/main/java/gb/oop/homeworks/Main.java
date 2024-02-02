@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 public class Main {
 
+    private static final int debugMode = 1;
+
     public static final int maxWordSize = 5;
     public static String promptTypeGame = String.format("Для начала определимся с типом игры:%n" +
             "  1 - только цифры%n" +
@@ -25,10 +27,16 @@ public class Main {
             "  1 - только уникальные символы%n" +
             "  2 - символы могут повторятся%n" +
             "Введите ваш ответ: ");
+    public static String promptContinue = String.format("Хотите продолжить игру?%n" +
+            "  1 - Да%n" +
+            "  2 - Нет%n" +
+            "Выш выбор: ");
+
     public static String promptValue = "Введите %s";
 
     /**
      * Метод возвращающий класс игры в зависимости от выбранного варианта
+     *
      * @param typeGame Целое число
      * @return Класс реализующий конкретный тип игры
      */
@@ -45,7 +53,8 @@ public class Main {
 
     /**
      * Метод запроса целочисленных данных у игрока
-     * @param prompt Текстовое приглашения
+     *
+     * @param prompt  Текстовое приглашения
      * @param scanner экземпляр сканера для считывания данных
      * @return целое число введеное игроком или -999 в случае ошибки.
      */
@@ -56,6 +65,8 @@ public class Main {
             result = scanner.nextInt();
         } catch (InputMismatchException e) {
             System.out.println("Вы ввели не число!");
+            String error = scanner.next();
+            System.out.println(error);
         } catch (NoSuchElementException e) {
             System.out.println("Всё електричество кончилось! Кина не будет!");
         } catch (IllegalStateException e) {
@@ -67,21 +78,25 @@ public class Main {
 
     /**
      * Метод запрашивающий у игрока строковые данные
-     * @param prompt текствое приглашение
+     *
+     * @param prompt  текствое приглашение
      * @param scanner экземпляр сканера для ввода данных
      * @return Строку введеную пользователем
      */
     public static String getString(String prompt, Scanner scanner) {
         System.out.printf(prompt);
-        String result = scanner.nextLine();
+        String result = scanner.next();
         return result;
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        AbstractGame newGame;
-        int userAnswer = getAnswer(promptTypeGame, scanner);
+        AbstractGame newGame = null;
+        int userAnswer = -999;
         while (userAnswer != 0) {
+            if (Objects.isNull(newGame) || newGame.getGameStatus().equals(GameStatus.INIT)){
+                userAnswer=getAnswer(promptTypeGame, scanner);
+            }
             newGame = getTypeGame(userAnswer);
             if (Objects.isNull(newGame)) {
                 userAnswer = 0;
@@ -98,6 +113,10 @@ public class Main {
                 newGame.start(wordSize, maxAttempts, conditions);
             }
             while (newGame.getGameStatus().equals(GameStatus.START)) {
+                System.out.printf("Текущая игра %s. Осталось %d попыток.%n", newGame.getTypeGame(),newGame.getAttemptLeft());
+                if (debugMode==1){
+                    System.out.printf("Загаданное слово %s%n", newGame.getHiddenWord());
+                }
                 userAnswer = getAnswer(promptCommand, scanner);
                 switch (userAnswer) {
                     case 1:
@@ -111,6 +130,16 @@ public class Main {
                         String value = getString(String.format(promptValue, "ваш вариант загаданного слова: "), scanner);
                         Answer answer = newGame.inputValue(value);
                         System.out.println(answer);
+                        System.out.println(newGame.getGameStatus());
+                        if (!newGame.getGameStatus().equals(GameStatus.START)) {
+                            userAnswer = getAnswer(promptContinue, scanner);
+                            if (userAnswer == 1) {
+                                newGame.stop();
+                            } else {
+                                newGame.exit();
+
+                            }
+                        }
                         break;
                     case 4:
                         HistoryGame history = newGame.getHistoryGame();
@@ -119,7 +148,7 @@ public class Main {
                         } else System.out.println("Игра ещё не начиналась. Какая может быть история");
                         break;
                     case 0:
-                        newGame.stop();
+                        newGame.exit();
                         break;
                     default:
                         System.out.println("Я могу до безконечности задавать вопросы. А ты готов до безконечности давать неправильные ответы?");
@@ -127,6 +156,7 @@ public class Main {
 
                 }
             }
+            if (newGame.getGameStatus().equals(GameStatus.EXIT)) userAnswer =0;
         }
         System.out.println("Пока-пока...");
         scanner.close();
@@ -134,16 +164,17 @@ public class Main {
 
     /**
      * Метод проверки введенных игроком параметров игры
-     * @param game экземпляр текущей игры
-     * @param wordSize размер загаданного слова
-     * @param maxAttempts  количество попыток
-     * @param conditions условия генерации слова
+     *
+     * @param game        экземпляр текущей игры
+     * @param wordSize    размер загаданного слова
+     * @param maxAttempts количество попыток
+     * @param conditions  условия генерации слова
      * @return true если введенные параметры корректны, иначе false
      */
     private static boolean checkParameters(AbstractGame game, Integer wordSize, Integer maxAttempts, Conditions conditions) {
         if (Objects.isNull(conditions)) return false;
         if (wordSize <= 0 || wordSize > maxWordSize) {
-            System.out.printf("Размер загадываемого слова не может быть больше %d и меньше или равно нуля%n",
+            System.out.printf("Размер загадываемого слова не может быть больше %d и меньше или равно нулю%n",
                     maxWordSize);
             return false;
         }

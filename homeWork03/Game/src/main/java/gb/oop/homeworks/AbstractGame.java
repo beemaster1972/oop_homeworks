@@ -5,14 +5,14 @@ import java.util.Random;
 
 /** Класс прародитель всех игр типа Быки и коровы */
 public abstract class AbstractGame implements Game {
-    private String word;
-    private Integer attemptCounter;
-    private Integer maxAttempts;
-    private Integer wordSize;
-    private Conditions currentCondition;
-    private GameStatus status = GameStatus.INIT;
-    private HistoryGame historyGame;
-    private Integer charListSize;
+    private String word; //Загаданное слово
+    private Integer attemptCounter; //Текущее количество попыток
+    private Integer maxAttempts; //Начальное количество попыток
+    private Integer wordSize; //Длина загаданного слова
+    private Conditions currentCondition; //Текущие условия генерации слова
+    private GameStatus status = GameStatus.INIT; //Статус игры
+    private HistoryGame historyGame; //История текущей игры
+//    private Integer charListSize; //Размер используемого "алфавита" для генерации слова
 
     /**
      * Метод генерации загаданного слова
@@ -23,7 +23,7 @@ public abstract class AbstractGame implements Game {
     public String generateWord(Integer sizeWord, Conditions conditions) {
         StringBuilder result = new StringBuilder();
         List<String> charList = generateCharList();
-        charListSize = charList.size();
+//        charListSize = charList.size();
         Random rand = new Random();
         String randomSymbol = charList.get(rand.nextInt(charList.size()));
         for (int i = 0; i < sizeWord; i++) {
@@ -73,13 +73,18 @@ public abstract class AbstractGame implements Game {
 
     @Override
     public void stop() {
-        status = GameStatus.LOSE;
+        status = GameStatus.INIT;
     }
 
     @Override
     public void restart() {
         status = GameStatus.RESTART;
         start(wordSize, maxAttempts, currentCondition);
+    }
+
+    @Override
+    public void exit() {
+        status = GameStatus.EXIT;
     }
 
     /**
@@ -114,6 +119,13 @@ public abstract class AbstractGame implements Game {
     }
 
     public abstract Integer getCharListSize();
+    public abstract String getTypeGame();
+    public String getHiddenWord(){
+        return word;
+    }
+    public Integer getAttemptLeft(){
+        return attemptCounter;
+    }
 
     @Override
     public GameStatus getGameStatus() {
