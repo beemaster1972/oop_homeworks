@@ -1,17 +1,31 @@
 package gb.oop.homeworks;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Calculator calc = new Calculator();
+        List<Integer> intList = new ArrayList<>();
+        List<Double> doubleList = new ArrayList<>();
+        BinaryCalculator<String> strBin = new BinaryCalculator<>();
+        String str = "101";
+        System.out.printf("Dec(%s) = %d%n",str, strBin.fromBinary(str));
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        BinaryCalculator<Long> longBin = new BinaryCalculator<>();
+        str = "111";
+        System.out.printf("Dec(%s) = %d%n", Long.parseLong(str,10),longBin.fromBinary(Long.parseLong(str,10)));
+        BinaryCalculator<Double> doubleBin = new BinaryCalculator<>();
+        System.out.printf("Dec(%f) = %d%n", 101.0,doubleBin.fromBinary(101.0));
+        for (int i = 5; i > 0; i--) {
+            intList.add(i);
+            doubleList.add((double) i);
         }
+        System.out.printf("Сумма целых = %.2f%n", calc.sum(intList));
+        System.out.printf("Сумма double = %.2f%n", calc.sum(doubleList));
+        System.out.printf("Умножение int = %.2f%n", calc.mult(intList));
+        System.out.printf("Умножение  double = %.2f%n", calc.mult(doubleList));
+        System.out.printf("Деление int = %f%n", calc.div(intList));
+        System.out.printf("Деление double = %f%n", calc.div(doubleList));
     }
 }

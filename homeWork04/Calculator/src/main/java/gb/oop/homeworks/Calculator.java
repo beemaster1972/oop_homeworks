@@ -1,7 +1,3 @@
-/*
-3)	Написать класс калькулятор, принимающий List целочисленных значений,
-возвращающий сумму элементов коллекции (метод sum)
- */
 package gb.oop.homeworks;
 
 import lombok.AllArgsConstructor;
@@ -11,15 +7,33 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 
-public class Calculator<N extends Number> {
+public class Calculator {
+    public Double sum(List<? extends Number> numbers){
+        double res =0;
+        for (Number number : numbers) {
+            res += number.doubleValue();
 
-    private List<N> numbers;
+        }
+        return res;
+    }
 
-    public Double sum() {
-        return numbers.stream().mapToDouble(Number::doubleValue).sum();
+    public Double mult(List<? extends Number> numbers){
+        double res = 1;
+        for (Number number : numbers) {
+            res *= number.doubleValue();
+
+        }
+        return res;
+    }
+
+    public Double div(List<? extends Number> numbers){
+        double res = numbers.get(0).doubleValue();
+        for (int i = 1; i < numbers.size(); i++) {
+            res /= numbers.get(i).doubleValue();
+
+        }
+        return res;
     }
 }
-
