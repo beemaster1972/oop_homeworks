@@ -11,7 +11,7 @@ public class Main {
         BinaryCalculator<String> strBin = new BinaryCalculator<>();
         String str = "101";
         System.out.printf("Dec(%s) = %d%n",str, strBin.fromBinary(str));
-
+        View<BinaryCalculator> viewBinary = new View<>();
         BinaryCalculator<Long> longBin = new BinaryCalculator<>();
         str = "111";
         System.out.printf("Dec(%s) = %d%n", Long.parseLong(str,10),longBin.fromBinary(Long.parseLong(str,10)));

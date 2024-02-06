@@ -23,7 +23,12 @@ public class BinaryCalculator<B> extends Calculator {
 
     public String toBinary (B number){
         String res = "";
-        int num = Math.floor(number)
+        Double num = Math.floor(Double.parseDouble(number.toString()));;
+        if (num<=0) return null;
+        while (num !=0){
+            res += num % 2;
+            num /= 2;
+        }
         return res;
 
     }
