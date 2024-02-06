@@ -10,7 +10,15 @@ import lombok.NoArgsConstructor;
 
 public class View<C extends Calculator> {
     private C calc;
-    public String printCalc(String func, String parameter, String result){
+    public String printCalc(int funcIndex, C calc){
+        String funcName ="", parameter="",result="";
+        switch (funcIndex){
+            case 0:
+                funcName = "sum";
+
+                break;
+        }
+
         return String.format("%s(%s) = %s",func, parameter,result);
     }
 }
