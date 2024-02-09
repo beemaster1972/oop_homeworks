@@ -19,7 +19,7 @@ import java.util.Random;
 public class Controller {
     private StudyGroupService service;
     private View view;
-    private String separator = "=======================================================";
+    private final String separator = "=======================================================";
 
     //    public Controller(){
 //        this.service = service;
