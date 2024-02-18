@@ -1,2 +1,6 @@
-package gb.oop.homeworks.view;public interface View {
+package gb.oop.homeworks.interfaces;
+
+public interface View {
+    final String separator = "=============================================================";
+    void printValue();
 }

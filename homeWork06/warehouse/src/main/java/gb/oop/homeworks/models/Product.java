@@ -1,36 +1,21 @@
-package gb.oop.homeworks;
+package gb.oop.homeworks.models;
+
+import gb.oop.homeworks.interfaces.iProduct;
+import lombok.Data;
 
 import java.util.Objects;
 
-public class Product implements iProduct{
-    protected String name;
+@Data
 
-    public Product(String name, int quantity, int price, int maxQuantity) {
+public class Product implements iProduct {
+    protected String name;
+    protected int price;
+    protected Double maxQuantity;
+
+    public Product(String name, int price, double maxQuantity) {
         this.name = name;
-        this.quantity = quantity;
         this.price = price;
         this.maxQuantity = maxQuantity;
-    }
-
-    protected int quantity;
-    protected int price;
-    protected int maxQuantity;
-    @Override
-    public boolean decreaseQuantity(int amount) {
-        if (quantity - amount < 0 || quantity - amount > maxQuantity){
-            return false;
-        }
-        quantity -= amount;
-        return true;
-    }
-
-    @Override
-    public boolean IncreaseQuntity(int amount) {
-        if (quantity+amount>maxQuantity || quantity+amount<0){
-            return false;
-        }
-        quantity += amount;
-        return true;
     }
 
     @Override

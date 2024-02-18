@@ -1,2 +1,10 @@
-package gb.oop.homeworks.models;public class NullLogger {
+package gb.oop.homeworks.models;
+
+import gb.oop.homeworks.interfaces.iLogger;
+
+public class NullLogger implements iLogger {
+    @Override
+    public void log(String message) {
+
+    }
 }
