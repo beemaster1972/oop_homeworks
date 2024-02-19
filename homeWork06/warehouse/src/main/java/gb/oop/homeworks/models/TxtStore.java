@@ -7,6 +7,9 @@ import lombok.AllArgsConstructor;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Класс для сохранения базы в тектсовый файл
+ */
 @AllArgsConstructor
 public class TxtStore implements iStore {
     iLogger logger;

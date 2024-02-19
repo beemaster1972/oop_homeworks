@@ -11,13 +11,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Класс описывающий склад
+ */
 @AllArgsConstructor
 @Data
 public class Warehouse extends AbstractWarehouse {
-
+    // Словарь для хранения товара и его количества
     protected Map<iProduct, Double> products;
+    // логгер
     protected iLogger logger;
+    // Список для хранения заказов
     protected List<iOrder> orders;
+    // Как будем работать с базой данных
     protected iStore store;
 
     public Warehouse(String name, Map<iProduct, Double> products, iLogger logger, List<iOrder> orders, iStore store) {
@@ -28,6 +34,11 @@ public class Warehouse extends AbstractWarehouse {
         this.store = store;
     }
 
+    /**
+     * Метод добавления товара на склад
+     * @param product - товар
+     * @param amount  - количество
+     */
     public void addProduct(iProduct product, Double amount) {
         Double remains = products.put(product, amount);
         if (Objects.isNull(remains)) {
@@ -39,6 +50,11 @@ public class Warehouse extends AbstractWarehouse {
             logger.log(String.format("Кол-во товара %s на складе %s может превысить максимально допустимое значение %.3f, поэтому товар не добавлен", product.getName(), name, product.getMaxQuantity()));
     }
 
+    /**
+     * Метод для списания товара со склада
+     * @param product - товар
+     * @param amount  - количество
+     */
     public void removeProduct(iProduct product, Double amount) {
         double remains = products.getOrDefault(product, 0.0);
         if (remains - amount >= 0){

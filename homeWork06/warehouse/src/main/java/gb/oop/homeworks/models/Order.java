@@ -9,6 +9,9 @@ import lombok.Data;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Класс обрабатывающий заказ на складе
+ */
 @Data
 public class Order implements iOrder {
 
@@ -26,6 +29,13 @@ public class Order implements iOrder {
         number = 0;
     }
 
+    /**
+     * Обработчик заказа
+     * @param warehouse   - склад
+     * @param product     - товар
+     * @param amount      - количество
+     * @param typeInvoice - тип накладной - Приходная | Расходная
+     */
     @Override
     public void processOrder(Warehouse warehouse,iProduct product, double amount, TypesOfInvoices typeInvoice) {
         numberInvoice = warehouse.getName() + String.valueOf(++number);

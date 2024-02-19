@@ -7,6 +7,9 @@ import java.util.Objects;
 
 @Data
 
+/**
+ * Класс описывающий товар
+ */
 public class Product implements iProduct {
     protected String name;
     protected int price;

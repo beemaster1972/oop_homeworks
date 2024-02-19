@@ -11,6 +11,9 @@ import java.util.Map;
 public class WarehouseView implements View {
     private Warehouse warehouse;
 
+    /**
+     * Метод выводящий в консоль текущее состояние склада
+     */
     @Override
     public void printValue() {
         System.out.printf("%s%n", warehouse.getName());
