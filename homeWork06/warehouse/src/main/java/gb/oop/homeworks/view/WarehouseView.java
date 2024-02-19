@@ -2,14 +2,16 @@ package gb.oop.homeworks.view;
 
 import gb.oop.homeworks.interfaces.View;
 import gb.oop.homeworks.interfaces.iProduct;
-import gb.oop.homeworks.models.Warehouse;
+import gb.oop.homeworks.models.AbstractWarehouse;
+import gb.oop.homeworks.models.LoggingWarehouse;
 import lombok.AllArgsConstructor;
 
+import java.util.AbstractCollection;
 import java.util.Map;
 
 @AllArgsConstructor
 public class WarehouseView implements View {
-    private Warehouse warehouse;
+    private AbstractWarehouse warehouse;
 
     @Override
     public void printValue() {

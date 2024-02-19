@@ -10,7 +10,7 @@ import gb.oop.homeworks.view.WarehouseView;
 
 public class Controller {
 
-    Warehouse model;
+    AbstractWarehouse model;
     View viewWarehouse;
 
     public void runApp(){

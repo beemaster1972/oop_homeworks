@@ -20,14 +20,14 @@ public class TxtStore implements iStore {
     }
 
     @Override
-    public void save(Warehouse warehouse) {
+    public void save(AbstractWarehouse warehouse) {
         logger.log(String.format("Записали данные по складу %s в файл %s",warehouse.getName(),path));
 
     }
 
     @Override
-    public Warehouse load() {
-        Warehouse result = new Warehouse(path, new HashMap<>(), logger, new ArrayList<>(), this);
+    public AbstractWarehouse load() {
+        AbstractWarehouse result = new LoggingWarehouse(path, new HashMap<>(), logger, new ArrayList<>(), this);
         logger.log(String.format("Загрузили склад %s из файла %s", result.getName(),path));
         return result;
     }

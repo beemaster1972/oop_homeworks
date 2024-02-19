@@ -3,11 +3,7 @@ package gb.oop.homeworks.models;
 import gb.oop.homeworks.enums.TypesOfInvoices;
 import gb.oop.homeworks.interfaces.iOrder;
 import gb.oop.homeworks.interfaces.iProduct;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Data
 public class Order implements iOrder {
@@ -16,7 +12,7 @@ public class Order implements iOrder {
 
     private TypesOfInvoices typeInvoice;
 
-    private Warehouse warehouse;
+    private AbstractWarehouse warehouse;
 
     private iProduct product;
 
@@ -27,7 +23,7 @@ public class Order implements iOrder {
     }
 
     @Override
-    public void processOrder(Warehouse warehouse,iProduct product, double amount, TypesOfInvoices typeInvoice) {
+    public void processOrder(AbstractWarehouse warehouse, iProduct product, double amount, TypesOfInvoices typeInvoice) {
         numberInvoice = warehouse.getName() + String.valueOf(++number);
         this.warehouse = warehouse;
         this.product = product;
@@ -41,7 +37,7 @@ public class Order implements iOrder {
                 warehouse.removeProduct(product,amount);
                 break;
             default:
-                warehouse.logger.log(String.format("Неизвестный тип накладной %s", typeInvoice.getDescription()));
+                System.out.printf(String.format("Неизвестный тип накладной %s", typeInvoice.getDescription()));
                 break;
         }
         warehouse.addOrder(this);
