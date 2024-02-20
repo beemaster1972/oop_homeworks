@@ -1,34 +1,35 @@
 package gb.oop.homeworks.controller;
 
-import gb.oop.homeworks.model.BinaryCalculator;
-import gb.oop.homeworks.model.iCalculator;
-import gb.oop.homeworks.model.ListCalculator;
-import gb.oop.homeworks.view.BinaryView;
-import gb.oop.homeworks.view.ListView;
+import gb.oop.homeworks.view.ComplexView;
 import gb.oop.homeworks.view.View;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
 public class AppController {
-    private ListController listController;
+    private iController controller;
+    private View view;
+    private final static String calcMenu = "Выберите калькулятор:%n" +
+            "1. Комплексный калькулятор%n" +
+            "Ваш выбор: ";
 
-    private BinaryController binaryController;
-
-    public AppController(ListController listController, BinaryController binaryController) {
-        this.listController = listController;
-        this.binaryController = binaryController;
-    }
 
     public AppController() {
-        listController = new ListController();
-        binaryController = new BinaryController();
+        Integer choice = null;
+        while (choice == null && controller == null) {
+            choice = new GetChoice().getIntChoice(calcMenu);
+            controller = switch (choice) {
+                case 1 -> new ComplexController();
+                default -> null;
+            };
+            view = switch (choice) {
+                case 1 -> new ComplexView();
+                default -> null;
+            };
+        }
     }
 
-    public void runCalc() {
-        listController.runList();
-        binaryController.runBinary();
-
+    public void run() {
+        controller.run(view);
 
 
     }

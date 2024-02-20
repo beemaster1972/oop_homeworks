@@ -11,15 +11,25 @@ import java.util.Objects;
  * RatioType realPart - действительная часть
  * RatioType imaginaryPart - мнимая часть
  */
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Data
 public class ComplexType {
     /** Действительная часть*/
     private int realPart;
     /** Мнимая часть*/
     private int imaginaryPart;
-
+    public ComplexType(int realPart,int imaginaryPart){
+        this.realPart = realPart;
+        this.imaginaryPart = imaginaryPart;
+    }
+    public ComplexType(int realPart){
+        this.realPart = realPart;
+        this.imaginaryPart = 0;
+    }
+    public ComplexType(){
+        realPart = 0;
+        imaginaryPart = 0;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,8 +49,9 @@ public class ComplexType {
             case -1 -> "%d - %di";
             case 1 -> "%d + %di";
             case 0 -> "%d";
+            default -> "null";
         };
-        return String.format(sign, realPart, sign, imaginaryPart);
+        return String.format(sign, realPart, imaginaryPart);
 
     }
 }
