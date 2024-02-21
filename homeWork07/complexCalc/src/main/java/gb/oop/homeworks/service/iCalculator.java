@@ -1,4 +1,4 @@
-package gb.oop.homeworks.model;
+package gb.oop.homeworks.service;
 
 
 

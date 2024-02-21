@@ -1,4 +1,6 @@
-package gb.oop.homeworks.model;
+package gb.oop.homeworks.service;
+
+import gb.oop.homeworks.model.ComplexType;
 
 /**
  * Класс реализующий деление комплексных чисел

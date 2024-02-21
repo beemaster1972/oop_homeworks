@@ -1,7 +1,7 @@
 package gb.oop.homeworks.controller;
 
 import gb.oop.homeworks.model.ComplexType;
-import gb.oop.homeworks.view.ComplexView;
+import gb.oop.homeworks.service.GetChoice;
 import gb.oop.homeworks.view.View;
 
 public class ComplexController implements iController {

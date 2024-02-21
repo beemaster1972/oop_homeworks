@@ -1,9 +1,8 @@
 package gb.oop.homeworks.controller;
 
+import gb.oop.homeworks.service.GetChoice;
 import gb.oop.homeworks.view.ComplexView;
 import gb.oop.homeworks.view.View;
-
-import java.util.Scanner;
 
 public class AppController {
     private iController controller;

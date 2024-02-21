@@ -1,6 +1,7 @@
 package gb.oop.homeworks.view;
 
 import gb.oop.homeworks.model.*;
+import gb.oop.homeworks.service.*;
 
 import java.util.HashMap;
 import java.util.Map;
