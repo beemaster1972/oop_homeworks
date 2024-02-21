@@ -18,6 +18,7 @@ public class ComplexView implements View{
     @Override
     public String printCalc(char operation, Object firstArg, Object secondArg) {
         iComplexCalculator calc = operations.getOrDefault(operation,new ComplexCalculatorNull());
-        return calc.calculate((ComplexType) firstArg,(ComplexType) secondArg).toString();
+        ComplexType result = calc.calculate((ComplexType) firstArg,(ComplexType) secondArg);
+        return (result==null)?null:result.toString();
     }
 }

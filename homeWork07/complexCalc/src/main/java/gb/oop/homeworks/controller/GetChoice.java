@@ -36,13 +36,11 @@ public class GetChoice {
         if (!arg.matches("\\d+[+-]\\d+i|\\d+")){
             return null;
         }
-        Pattern pattern = Pattern.compile("\\d+[+-]\\d+i|\\d+");
+        Pattern pattern = Pattern.compile("(\\d+)([+-]?)(\\d+)([i])");
         Matcher matcher = pattern.matcher(arg);
-
-        System.out.println(matcher);
-        String[] args = arg.split("[+-]");
-        int realPart = Integer.parseInt(args[0]);
-        int imaginaryPart = Integer.parseInt(args[1].split("i")[0]);
+        if (!matcher.find()) return null;
+        int realPart = Integer.parseInt(matcher.group(1));
+        int imaginaryPart = matcher.group(2).equals("-") ? Integer.parseInt(matcher.group(3))*-1:Integer.parseInt(matcher.group(3));
         return new ComplexType(realPart,imaginaryPart);
     }
 

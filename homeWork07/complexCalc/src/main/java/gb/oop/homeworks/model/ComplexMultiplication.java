@@ -13,10 +13,12 @@ public class ComplexMultiplication implements iCalculator, iComplexCalculator {
     @Override
     public ComplexType calculate(ComplexType... args) {
         if (args.length < 2) return null;
-        int realPart = 1, imaginaryPart = 1;
+        int realPart = 1, oldRealPart=1, imaginaryPart = 0;
         for (ComplexType complexType : args) {
-            realPart = realPart * complexType.getRealPart() + complexType.getImaginaryPart() * imaginaryPart;
-            imaginaryPart = realPart * complexType.getImaginaryPart() + complexType.getRealPart() * imaginaryPart;
+            if (complexType==null) return null;
+            realPart = realPart * complexType.getRealPart() + (complexType.getImaginaryPart() * imaginaryPart) * -1;
+            imaginaryPart = oldRealPart * complexType.getImaginaryPart() + complexType.getRealPart() * imaginaryPart;
+            oldRealPart = realPart;
         }
         return new ComplexType(realPart, imaginaryPart);
     }

@@ -17,7 +17,7 @@ public class ComplexDivision implements iCalculator, iComplexCalculator {
             System.out.println("Для операции деления можно передавать только два аргумента!!!");
             return null;
         }
-        if (args[1].equals(new ComplexType(0, 0))) {
+        if (args[1] == null || args[1].equals(new ComplexType(0, 0))) {
             System.out.println("В нашем калькуляторе запрещено делить на ноль!!!");
             return null;
         }

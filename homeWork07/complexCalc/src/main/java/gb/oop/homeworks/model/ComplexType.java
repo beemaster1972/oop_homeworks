@@ -51,7 +51,7 @@ public class ComplexType {
             case 0 -> "%d";
             default -> "null";
         };
-        return String.format(sign, realPart, imaginaryPart);
+        return String.format(sign, realPart, Math.abs(imaginaryPart));
 
     }
 }

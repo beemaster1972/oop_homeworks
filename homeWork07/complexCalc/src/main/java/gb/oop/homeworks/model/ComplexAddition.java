@@ -14,6 +14,7 @@ public class ComplexAddition implements iCalculator, iComplexCalculator {
     public ComplexType calculate(ComplexType... args) {
         int realPart = 0, imaginaryPart = 0;
         for (ComplexType complexType : args) {
+            if (complexType==null) return null;
             realPart += complexType.getRealPart();
             imaginaryPart += complexType.getImaginaryPart();
         }

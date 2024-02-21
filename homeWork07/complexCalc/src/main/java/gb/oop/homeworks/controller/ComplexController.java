@@ -24,7 +24,7 @@ public class ComplexController implements iController {
                     ComplexType firstArg = getChoice.getComplex(promptComplex);
                     Character op = getChoice.getStrChoice(promptOperation).charAt(0);
                     ComplexType secondArg = getChoice.getComplex(promptComplex);
-                    System.out.printf("%s %s %s = %s%n",firstArg,op,secondArg,view.printCalc(op, firstArg, secondArg));
+                    System.out.printf("(%s) %s (%s) = %s%n",firstArg,op,secondArg,view.printCalc(op, firstArg, secondArg));
                     break;
                 case 0:
                     exit = true;
