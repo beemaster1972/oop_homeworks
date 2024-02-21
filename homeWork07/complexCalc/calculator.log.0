@@ -1,0 +1,19 @@
+февр. 21, 2024 9:21:59 PM gb.oop.homeworks.controller.ComplexController log
+FINE: Scanner initialized
+февр. 21, 2024 9:22:01 PM gb.oop.homeworks.controller.ComplexController log
+FINE: User selected 1. menu item
+февр. 21, 2024 9:22:07 PM gb.oop.homeworks.controller.ComplexController log
+FINE: First argument is 2 + 3i
+февр. 21, 2024 9:22:10 PM gb.oop.homeworks.controller.ComplexController log
+FINE: Operation is 2 + 3i
+февр. 21, 2024 9:22:15 PM gb.oop.homeworks.controller.ComplexController log
+FINE: Second argument is 4
+февр. 21, 2024 9:22:15 PM gb.oop.homeworks.view.LoggingComplexView printCalc
+INFO: (2 + 3i) * (4) = 8 + 12i
+
+февр. 21, 2024 9:22:18 PM gb.oop.homeworks.controller.ComplexController log
+FINE: User selected 0. menu item
+февр. 21, 2024 9:22:18 PM gb.oop.homeworks.controller.ComplexController log
+FINE: Exiting from application
+февр. 21, 2024 9:22:18 PM gb.oop.homeworks.controller.ComplexController log
+FINE: Сlosing Scanner
